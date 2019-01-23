@@ -16,76 +16,96 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+// ========================================================================
+//    TRIANGLE ENDPOINT
+// ========================================================================
+//  FUNCTION : check the type of a triangle
+//  PARAM : A, B, C = size of triangle sides
+//  RETURN : type of triangle (Scalene, Equilateral, Isosceles, Incorrect) */
 
-
-// une equipe
-$router->get('equipes/{idequipe}', function ($idequipe) {
-	$res = DB::select("SELECT COUNT(*) AS nb FROM EQUIPE WHERE idequipe=?",[$idequipe]);
-	if ($res[0]->nb == 0) {
-		return response()->json(["status"=>false,"message"=>"Equipe inexistante"],200);
-	}
-	$equipe = DB::select("SELECT * FROM EQUIPE WHERE idequipe=?",[$idequipe]);
-	return response()->json(["status"=>true, "equipe"=>$equipe[0]]);
+$router->get('/', function () use ($router) {
+    return $router->app->version();
 });
 
-// liste des equipes 
-$router->get('equipes', function () {
-	$equipesArray = array();
-	$equipes = DB::select('SELECT * FROM EQUIPE');
-	foreach ($equipes as $equipe) {
-		$equipesArray[] = get_object_vars($equipe);
-	}
-	return response()->json($equipesArray);
+// ========================================================================
+//    CRUD BLOG ENDPOINTS
+// ========================================================================
+
+// ------------------- POST -------------------
+
+//  FUNCTION : return a list of all posts
+//  PARAM : -
+//  RETURN : JSON array of all posts */
+
+$router->get('/test', function () use ($router) {
+    return "TEST";
 });
 
-// ajout d'une equipe
-$router->post('equipes', function(Request $request) {
-    $validator = Validator::make($request->all(), [
-            'numequipe' => 'required|integer',
-            'detailsequipe' => 'required|string'
-            ]);
-    
-        if ($validator->fails()) {
-            $erreurs = json_encode($validator->errors()->all());
-            return response()->json(["status"=>false, "message"=>"equipe pas ajoutée ".$erreurs], 200);
-        }
-        $data = $request->all();
-        $id = DB::select("SELECT MAX(idequipe) AS maximum FROM EQUIPE");
-        $data["idequipe"] = $id[0]->maximum + 1;
-        $result=DB::table('EQUIPE')->insert($data);
-        return response()->json(["status"=>true, "equipe"=>$data]);
-    });
+//  FUNCTION : return a specific posts
+//  PARAM : IDPOST
+//  RETURN : JSON object of the post
 
-// supression d'une equipe
-$router->delete('equipes/{idequipe}', function ($id) {
-	$res = DB::select("SELECT COUNT(*) AS nb FROM EQUIPE WHERE idequipe=?",[$id]);
-	if ($res[0]->nb == 0) {
-		return response()->json(["status"=>false,"message"=>"Equipe inexistante"],200);
-	}
-	$result = DB::table('EQUIPE')->where('idequipe','=',$id)->delete();
-	return response()->json(["status"=>true,"message"=>"Equipe supprimée"],200);
-	
+$router->get('/', function () use ($router) {
+    return $router->app->version();
 });
 
-// modfication d'une equipe
-$router->put('equipes', function(Request $request) {
-	$validator = Validator::make($request->all(), [
-        'idequipe' => 'required|integer',
-		'numequipe' =>'required|integer',
-        'detailsequipe' => 'required|string'
-        ]);
+//  FUNCTION : add a new post
+//  PARAM : 
+//  RETURN : 
 
-    if ($validator->fails()) {
-		$erreurs = json_encode($validator->errors()->all());
-		return response()->json(["status"=>false, "message"=>"Equipe pas modifiée ".$erreurs], 200);
-    }
-	$data = $request->all();
-	$id = $data["idequipe"];
-	
-	$res = DB::select("SELECT COUNT(*) AS nb FROM EQUIPE WHERE idequipe=?",[$id]);
-	if ($res[0]->nb == 0) {
-		return response()->json(["status"=>false,"message"=>"Equipe inexistante"],200);
-	}
-	$result=DB::table('EQUIPE')->where('idequipe',$id)->update($data);
-	return response()->json(["status"=>true,"message"=>"Equipe modifiée"]);
+$router->get('/', function () use ($router) {
+    return $router->app->version();
 });
+
+//  FUNCTION : delete an existing post
+//  PARAM : 
+//  RETURN : 
+
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+
+//  FUNCTION : modify an existing post
+//  PARAM : 
+//  RETURN : 
+
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+
+// ----------------- COMMENT -----------------
+
+//  FUNCTION : return a list of all comments from a post
+//  PARAM : 
+//  RETURN :
+
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+
+//  FUNCTION : add a new comment
+//  PARAM : 
+//  RETURN : 
+
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+
+//  FUNCTION : delete an existing comment
+//  PARAM : 
+//  RETURN : 
+
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+
+//  FUNCTION : modify an existing comment
+//  PARAM : 
+//  RETURN : 
+
+$router->get('/', function () use ($router) {
+    return $router->app->version();
+});
+
+
+// BONUS : Make it possible to have images as part of posts
