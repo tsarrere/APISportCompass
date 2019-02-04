@@ -1,4 +1,4 @@
-In this repository you can find a test requested by the company SportCompass (based in Denmark). I had to create an API with two functions:        
+In this repository you may find a test requested by the company SportCompass (based in Denmark). I had to create an API with two functions:        
 
 * Checking the type of a triangle based on the size of it sides,         
 * CRUD enpoints for a blog, dealing with 2 entities : post and comment.
