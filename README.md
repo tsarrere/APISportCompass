@@ -13,9 +13,9 @@ I chose to use PHP to create this API, and more precisely the Lumen framework (b
 
 The database is made of 2 tables. One for the posts, and one for the comments.
 
-![Table post](https://github.com/mmicastres/TFC81/blob/master/DOCS/post.png)
+![Table post](https://github.com/tsarrere/APISportCompass/blob/master/DOCS/post.png)
 
-![Table comment](https://github.com/mmicastres/TFC81/blob/master/DOCS/comment.png)
+![Table comment](https://github.com/tsarrere/APISportCompass/blob/master/DOCS/comment.png)
 
 The **COMMENT** table have a foreign key referencing *IDPOST* on the **POST** table : every comments must be attached to one and only one post.
 
@@ -166,4 +166,4 @@ Tests have been conducted using the software Advanced Rest Client. Every route d
 
 This screen is an example using Advanced Rest Client to add a new comment : the request is made using a POST method on the corresponding route of the API,sending the required data in JSON (a post ID, the comment author) + the content of the comment. As you can see, the API returned a 200 HTTP code (succes) with the data of the new comment created.
 
-![Screenshot de test utilisant Advanced Rest Client](https://github.com/mmicastres/TFC81/blob/master/DOCS/ScreenARC1.png)
+![Screenshot de test utilisant Advanced Rest Client](https://github.com/tsarrere/APISportCompass/blob/master/DOCS/ScreenARC1.png)
