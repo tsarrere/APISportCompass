@@ -1,11 +1,11 @@
-# Documentation
-
-Unfortunately, I am returning the test unfinished, as I am a student and currently have no free time (assignements, projects, looking for an internship and applying in my possible future schools). Most of the work has been done, and what remains to be done is actually quite redundant (update and delete routes for the comments).
-
-Please find in this repository the requested API having two functions :       
+In this repository you can find a test requested by the company SportCompass (based in Denmark). I had to create an API with two functions:        
 
 * Checking the type of a triangle based on the size of it sides,         
 * CRUD enpoints for a blog, dealing with 2 entities : post and comment.
+
+# Documentation
+
+Unfortunately, I am returning the test unfinished, as I am a student and currently have no free time (assignements, projects, looking for an internship and applying in my possible future schools). Most of the work has been done, and what remains to be done is actually quite redundant (only update and delete routes for the comments).
 
 I chose to use PHP to create this API, and more precisely the Lumen framework (based on Laravel). The database was created in MySQL, you will be able to find its creation script in the `DOCS/` folder.
 
