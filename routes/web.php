@@ -19,12 +19,29 @@ $router->get('/', function () use ($router) {
 // ========================================================================
 //    TRIANGLE ENDPOINT
 // ========================================================================
-//  FUNCTION : check the type of a triangle
-//  PARAM : A, B, C = size of triangle sides
-//  RETURN : type of triangle (Scalene, Equilateral, Isosceles, Incorrect) */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+/**
+     * Check and return the type of triangle made by the 3 variables a, b and c.
+     * This endpoint only accept numeric values or return an error.
+     * @param int $a, $b, $c => sides of the triangle
+     * @return string => Type of the triangle
+     */
+
+$router->get('/triangle/{a:[0-9]+}/{b:[0-9]+}/{c:[0-9]+}', function ($a,$b,$c) {
+
+    if($a == $b && $b == $c){
+        $triangle = 'Equilateral';
+    }
+    else if($a != $b && $b != $c && $a != $c){
+        $triangle = 'Scalene';
+    }
+    else if(($a == $b && $a != $c) || ($a == $c && $a != $b) || ($b == $c && $b != $a)){
+        $triangle = 'Isosceles';
+    }
+    else {
+        $triangle = 'Incorrect';
+    }
+    return $triangle;
 });
 
 // ========================================================================
@@ -33,79 +50,33 @@ $router->get('/', function () use ($router) {
 
 // ------------------- POST -------------------
 
-//  FUNCTION : return a list of all posts
-//  PARAM : -
-//  RETURN : JSON array of all posts */
+//  Return a list of all posts (call postList in BlogController)
+Route::get('posts', 'BlogController@postList');
 
-$router->get('/test', function () use ($router) {
-    return "TEST";
-});
+//  Return a specific post selected by its ID (call post in BlogController)
+Route::get('posts/{id}', 'BlogController@post');
 
-//  FUNCTION : return a specific posts
-//  PARAM : IDPOST
-//  RETURN : JSON object of the post
+//  Add a new post (call postAdd in BlogController)
+Route::post('posts', 'BlogController@postAdd');
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+//  Delete an existing post selected by its ID (call postDelete in BlogController)
+Route::delete('posts/{id}', 'BlogController@postDelete');
 
-//  FUNCTION : add a new post
-//  PARAM : 
-//  RETURN : 
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-//  FUNCTION : delete an existing post
-//  PARAM : 
-//  RETURN : 
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-//  FUNCTION : modify an existing post
-//  PARAM : 
-//  RETURN : 
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+//  Update an existing post (call postUpdate in BlogController)
+Route::put('posts', 'BlogController@postUpdate');
 
 // ----------------- COMMENT -----------------
 
-//  FUNCTION : return a list of all comments from a post
-//  PARAM : 
-//  RETURN :
+//  Return a list of all comments from a post (call comList in BlogController)
+Route::get('posts/{id}/comments', 'BlogController@comList');
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+//  Return a specific comment selected by its ID from a post (call com in BlogController)
+Route::get('posts/{id}/comments/{idcom}', 'BlogController@com');
 
-//  FUNCTION : add a new comment
-//  PARAM : 
-//  RETURN : 
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-//  FUNCTION : delete an existing comment
-//  PARAM : 
-//  RETURN : 
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
-//  FUNCTION : modify an existing comment
-//  PARAM : 
-//  RETURN : 
-
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+//  Add a new comment to an existing post selected by its ID (call comAdd in BlogController)
+Route::post('posts/{id}/comments/', 'BlogController@comAdd');
 
 
 // BONUS : Make it possible to have images as part of posts
+// encoder l'image en chaine de caractères > limité par le protocole HTTP
+// uploader l'image dans un serveur, envoyer le lien de l'image via l'API
